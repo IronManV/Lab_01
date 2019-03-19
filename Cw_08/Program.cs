@@ -39,7 +39,18 @@ namespace Cw_08
                     supp2++;
                 }
             }
-            Console.WriteLine("Supp2:" + supp2);
+            Console.WriteLine("Supp2:" + supp2 + "\n");
+
+            for(int i=0; i < 50;)
+            {
+                int number3 = rand.Next(1001);
+
+                if (number3 %3 == 0)
+                {
+                    i++;
+                    Console.WriteLine(number3);
+                }
+            }
             Console.ReadKey();
         }
     }

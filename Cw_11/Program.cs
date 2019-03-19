@@ -4,19 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cw_10
+namespace Cw_11
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int num = 49;
-            do
-            {
-                Console.WriteLine(num);
-                num = num - 2;
-            }
-            while (num >= 1);
+            int[] array = new int[20];
+            Console.WriteLine(array.Length);
 
             Console.ReadKey();
         }
