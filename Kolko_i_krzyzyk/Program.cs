@@ -11,9 +11,16 @@ namespace Kolko_i_krzyzyk
         static void Main(string[] args)
         {
             // man code for tictactoe game
-            char x = 'x';
-            char o = 'o';
+            string playerName1 = "";
+            string playerName2 = "";
+            char playerSymbolX = 'x';
+            char playerSymbolO = 'o';
             char[,] board = new char[3, 3];
+
+            Console.WriteLine("Enter name of player 1: ");
+            playerName1 = Console.ReadLine();
+            Console.WriteLine("Enter name of player 2: ");
+            playerName2 = Console.ReadLine();
 
         }
     }
