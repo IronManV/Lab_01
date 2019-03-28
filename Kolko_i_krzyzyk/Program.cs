@@ -10,6 +10,7 @@ namespace Kolko_i_krzyzyk
     {
         static void Main(string[] args)
         {
+            // man code for tictactoe game
             char x = 'x';
             char o = 'o';
             char[,] board = new char[3, 3];
