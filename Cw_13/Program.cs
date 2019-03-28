@@ -11,18 +11,23 @@ namespace Cw_13
         static void Main(string[] args)
         {
             Random rand = new Random();
-            int num = rand.Next(11)+1;
-            int random;
+            int num = rand.Next(2,6);
+            int randomNumber;
 
-            for(int i = 2; i <= 5; i++)
+            for(int i = 0; ; i++)
             {
-                random = (int)Math.Pow(num, i);
-                if(random < 10000)
+                randomNumber = (int)Math.Pow(num, i);
+                if(randomNumber < 10000)
                 {
-                    Console.WriteLine(i + " Potega liczby: " + num + " " + random);
+                    Console.WriteLine(i + " Potega liczby: " + num + " = " + randomNumber);
+                    
                 }
-                
+                else
+                {
+                    break;
+                }
 
+                
             }
             Console.ReadKey();
         }
