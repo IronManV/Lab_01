@@ -11,28 +11,40 @@ namespace Kolko_i_krzyzyk
         static void Main(string[] args)
         {
             // mai n code for tictactoe game
-            string playerName1 = "";
-            string playerName2 = "";
-            char playerSymbolX = 'x';
-            char playerSymbolO = 'o';
+            PlayerHuman gA = new PlayerHuman();
+            PlayerComputer gB = new PlayerComputer();
+            gA.Name = "User";
+            gB.Name = "Computer";
+            gA.Symbol = 'x';
+            gB.Symbol = 'o';
+
+
             char[,] board = new char[3, 3] {
                 { '1', '2', '3' },
                 { '4', '5', '6' },
                 { '7', '8', '9' }
             };
 
-            Console.WriteLine("Enter name of player 1: ");
-            playerName1 = Console.ReadLine();
-            Console.WriteLine("Enter name of player 2: ");
-            playerName2 = Console.ReadLine();
-
             //A loop over players moves
             bool gameOver = false;
+            bool movePlayerA = true;
             while (!gameOver)
             {
                 Console.Clear();
                 DrawBorad(board);
 
+                if (movePlayerA)
+                {
+                    Console.WriteLine("current player: " + gA.Name);
+                    gameOver = gA.MakeMove(board);
+                    movePlayerA = false;
+                }
+                else
+                {
+                    Console.WriteLine("current player: " + gB.Name);
+                    gameOver = gB.MakeMove(board);
+                    movePlayerA = true;
+                }
                 Console.ReadKey();
             }
 
@@ -52,6 +64,32 @@ namespace Kolko_i_krzyzyk
                 }
                 Console.WriteLine();
             }
+        }
+    }
+    interface IMove
+    {
+        bool MakeMove(char[,] board);
+    }
+
+    abstract class Player
+    {
+        public string Name { get; set; }
+        public char Symbol { get; set; }
+    }
+
+    class PlayerHuman : Player, IMove
+    {
+        public bool MakeMove(char[,] board)
+        {
+            return false; // to correct
+        }
+    }
+
+    class PlayerComputer : Player, IMove
+    {
+         public bool MakeMove(char[,] board)
+        {
+            return false; //to correct
         }
     }
 }
