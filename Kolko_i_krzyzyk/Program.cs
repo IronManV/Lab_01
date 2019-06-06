@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Kolko_i_krzyzyk
 {
@@ -47,10 +48,27 @@ namespace Kolko_i_krzyzyk
                     gameOver = gB.MakeMove(board, boardCopy);
                     movePlayerA = true;
                 }
-                Console.ReadKey();
+                if (gameOver)
+                    break;
             }
 
-            
+            //Game ending
+            Console.Clear();
+            DrawBorad(board);
+            Console.Write("Game over!");
+
+            if (gameOver)
+            {
+                Console.Write("The winner is");
+                if (movePlayerA)
+                    Console.WriteLine(gB.Name);
+                else
+                    Console.WriteLine(gA.Name);
+                
+            }
+            else
+                Console.WriteLine("A tie.");
+            Console.ReadKey();
         }
 
         static void DrawBorad(char[,] board)
@@ -124,13 +142,41 @@ namespace Kolko_i_krzyzyk
 
             return false;
         }
+        public bool placeSymbol(char c, char[,] board, char[,] boardCopy)
+        {
+            int height = board.GetLength(0);
+            int width = board.GetLength(1);
+            if(height != boardCopy.GetLength(0) || width != boardCopy.GetLength(1))
+                throw new Exception("Board sizes dont match!");
+
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < width; j++)
+                    {
+                    if ((board[i, j] == c) && (board[i,j] == boardCopy[i,j]))
+                        {
+                            board[i,j] = Symbol;
+                            return true;
+                        }   
+                    }
+            return false;
+        }
+        
     }
 
     class PlayerHuman : Player, IMove
     {
         public bool MakeMove(char[,] board, char[,] boardCopy)
         {
-            return CheckIfGameOver(board); // to correct
+            char chosenPalce;
+            do
+            {
+                Console.Write("Choose afree space: ");
+                chosenPalce = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+            }
+            while (!placeSymbol(chosenPalce, board, boardCopy));
+
+            return CheckIfGameOver(board);
         }
     }
 
@@ -138,7 +184,17 @@ namespace Kolko_i_krzyzyk
     {
          public bool MakeMove(char[,] board, char[,] boardCopy)
         {
-            return CheckIfGameOver(board); //to correct
+            Random rnd = new Random();
+            char chosenPalce;
+            do
+            {
+                int m = rnd.Next(1, board.Length + 1);
+                chosenPalce = m.ToString()[0];
+            }
+            while(!placeSymbol(chosenPalce, board, boardCopy));
+            Thread.Sleep(2000);
+
+            return CheckIfGameOver(board);
         }
     }
 }
